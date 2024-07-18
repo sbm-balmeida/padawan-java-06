@@ -12,19 +12,31 @@ public class TestaInsercaoComParametro {
 				
 		ConnectionFactory factory = new ConnectionFactory();
 		Connection connection = factory.recuperarConexao();
-		/*com esse setAutoCommit(false) tiramos a responsabilidade do JDBC de fazer 
+		connection.setAutoCommit(false);
+		/*
+		 * com esse setAutoCommit(false) tiramos a responsabilidade do JDBC de fazer 
 		 * os Commits das nossas transações, de fato inserir o produto na nossa 
 		 * tabela. Agora eu vou controlar o momento do Commit da minha aplicação, 
 		 * no momento da minha transação.
 		 */
-		connection.setAutoCommit(false);
-		
-		PreparedStatement stm = connection.prepareStatement(
+				
+		try {
+			PreparedStatement stm = connection.prepareStatement(
 				"INSERT INTO PRODUTO (nome, descricao) VALUES (?, ?)",
 				Statement.RETURN_GENERATED_KEYS);
 		
-		adicionarVariavel("SmartTV", "45 polegadas", stm);
-		adicionarVariavel("Radio", "Radio de bateria", stm);
+			adicionarVariavel("SmartTV", "45 polegadas", stm);
+			adicionarVariavel("Radio", "Radio de bateria", stm);
+		
+			connection.commit();
+		
+			stm.close();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ROLLBACK EXECUTADO");
+			connection.rollback();
+		}		
 	}
 	
 	private static void adicionarVariavel(String nome, String descricao, 
@@ -33,9 +45,9 @@ public class TestaInsercaoComParametro {
 		stm.setString(1, nome);
 		stm.setString(2, descricao);
 		
-//		if (nome.equals("Radio")) {
-//			throw new RuntimeException("Não foi possível adicionar o produto");
-//		}
+		if (nome.equals("Radio")) {
+			throw new RuntimeException("Não foi possível adicionar o produto");
+		}
 		
 		stm.execute();
 		
