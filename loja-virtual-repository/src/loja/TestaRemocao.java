@@ -16,7 +16,8 @@ public class TestaRemocao {
 		stm.setInt(1, 2);
 		stm.execute();
 				
-		/*o metodo getUpadateCount() irá retornar um inteiro. Esse inteiro 
+		/*
+		 * o metodo getUpadateCount() irá retornar um inteiro. Esse inteiro 
 		 * significa, quantas linhas que foram modificadas após o Statement ser 
 		 * executado.
 		 */
