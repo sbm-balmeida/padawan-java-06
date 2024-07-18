@@ -11,7 +11,7 @@ public class TestaInsercaoComParametro {
 	public static void main(String[] args) throws SQLException {
 		
 		String nome = "Mouse'";
-		String descricao = "Mouse sem fio";
+		String descricao = "Mouse sem fio; delete from produto;";
 				
 		ConnectionFactory factory = new ConnectionFactory();
 		Connection connection = factory.recuperarConexao();
