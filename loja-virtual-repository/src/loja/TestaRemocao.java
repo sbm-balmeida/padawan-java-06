@@ -16,7 +16,8 @@ public class TestaRemocao {
 		
 		/*o metodo getUpadateCount() irá retornar um inteiro. Esse inteiro 
 		 * significa, quantas linhas que foram modificadas após o Statement ser 
-		 * executado.*/
+		 * executado.
+		 */
 		Integer linhaModificadas = stm.getUpdateCount();
 		System.out.println("Quantidade de linhas que foram modificadas: " + 
 							linhaModificadas);

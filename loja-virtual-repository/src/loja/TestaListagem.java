@@ -13,7 +13,9 @@ public static void main(String[] args) throws SQLException {
 		Connection connection = connectionFactory.recuperarConexao();
 		
 		Statement stm = connection.createStatement();
-//		.execute, ele vai nos retornar um booleano true quando o retorno do meu Statement for uma lista.
+		/*.execute, ele vai nos retornar um booleano true quando o retorno do meu 
+		 * Statement for uma lista.
+		 */
 //		boolean resultado =  stm.execute("SELECT ID, NOME, DESCRICAO FROM PRODUTO");
 //		System.out.println(resultado);
 		stm.execute("SELECT ID, NOME, DESCRICAO FROM PRODUTO");
