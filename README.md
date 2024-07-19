@@ -1,6 +1,6 @@
 # Bem-vindos ao meu repositório!
 
->Status: **Desenvolvendo** 💻
+>Status: **Finalizado** ✔️
 
 ##
 
