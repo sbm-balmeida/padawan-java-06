@@ -13,4 +13,8 @@ public class Categoria {
 	public Object getNome() {
 		return nome;
 	}
+
+	public int getId() {
+		return id;
+	}
 }
