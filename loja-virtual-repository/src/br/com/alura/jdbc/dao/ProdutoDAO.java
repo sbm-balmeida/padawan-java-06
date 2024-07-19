@@ -5,12 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.alura.jdbc.modelo.Produto;
 
 /*
  * Data Access Object ou DAO é quem trabalha com as informações do nosso objeto no 
- * banco de dados.
+ * banco de dados. 
  */
 public class ProdutoDAO {
 
@@ -21,6 +23,7 @@ public class ProdutoDAO {
 	}
 	
 	public void salvar(Produto produto) throws SQLException {
+		
 		String sql = "INSERT INTO PRODUTO (NOME, DESCRICAO) VALUES (?, ?)";
 		
 		try (PreparedStatement pstm = connection.prepareStatement(
@@ -36,5 +39,25 @@ public class ProdutoDAO {
 				}
 			}
 		}
+	}
+	
+	public List<Produto> listar() throws SQLException{
+		
+		List<Produto> produtos = new ArrayList<Produto>();
+		
+		String sql = "SELECT ID, NOME, DESCRICAO FROM PRODUTO";
+		
+		try(PreparedStatement pstm = connection.prepareStatement(sql)) {
+			pstm.execute();
+			
+			try (ResultSet rst = pstm.getResultSet()) {
+				while (rst.next()) {
+					Produto produto = new Produto(
+							rst.getInt(1), rst.getString(2), rst.getString(3));
+					produtos.add(produto);
+				}
+			}
+		}
+		return produtos;
 	}
 }
